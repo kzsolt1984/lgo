@@ -26,7 +26,6 @@ module trans {
     public static getRandomWord(randNumber) {
         var returnArr = [];
         var count = 0;
-        console.log(randNumber)
         for (var i in Dictionary.dict) {
             if (count === randNumber) {
                 returnArr.push(i)

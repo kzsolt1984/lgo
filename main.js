@@ -22,7 +22,6 @@ var trans;
         Dictionary.getRandomWord = function (randNumber) {
             var returnArr = [];
             var count = 0;
-            console.log(randNumber);
             for (var i in Dictionary.dict) {
                 if (count === randNumber) {
                     returnArr.push(i);
@@ -47,17 +46,35 @@ var trans;
             this._wordContent = document.querySelector(".wordContent");
             this._wordInput = document.querySelector(".wordInput");
             this._sendWordBtn = document.querySelector(".sendWord");
+            this._sayWord = document.querySelector(".sayWord");
             this._initHandlers();
             this.addRandomWord();
         }
         Translate.prototype._initHandlers = function () {
             var _this = this;
+            this._sayWord.addEventListener("click", function (ev) {
+                var textContent = _this._wordContent.textContent;
+                var msg = new SpeechSynthesisUtterance(textContent);
+                window.speechSynthesis.speak(msg);
+                ev.stopPropagation();
+            });
             this._sendWordBtn.addEventListener("click", function (ev) {
                 var inputVal = _this._wordInput.value;
                 var check = _this._wordInput.getAttribute("data-label");
                 if (inputVal === check) {
                     _this.addRandomWord();
                     _this._wordInput.value = "";
+                }
+                ev.stopPropagation();
+            });
+            this._wordInput.addEventListener("keyup", function (ev) {
+                if (ev.keyCode === 13) {
+                    var inputVal = _this._wordInput.value;
+                    var check = _this._wordInput.getAttribute("data-label");
+                    if (inputVal === check) {
+                        _this.addRandomWord();
+                        _this._wordInput.value = "";
+                    }
                 }
                 ev.stopPropagation();
             });

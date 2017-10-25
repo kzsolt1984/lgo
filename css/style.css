@@ -1,0 +1,15 @@
+/*body {
+    display: flex
+}*/
+
+.wordContainer {
+    display: flex;
+    margin-bottom: 30px;
+    width: 100%
+}
+
+.wordContent {
+    margin-left: 10px;
+    margin-right: 20px;
+    font-weight: bold;
+}
